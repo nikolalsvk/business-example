@@ -4,7 +4,12 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
+    if params[:search].present?
+      @places = Place.search(params[:search])
+    else
+      @places = Place.all
+    end
+
     @place = Place.new
     @add_mode = params[:add]
   end

@@ -3,6 +3,15 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <%= link_to "Add", places_path(:add => true), :method => :get, :class => "btn btn-primary" %>
+</br>
+</br>
+
+<%= form_tag(places_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search", :class => "form-control" %>
+  </br>
+  <%= submit_tag "Search", :class => "btn btn-secondary" %>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>

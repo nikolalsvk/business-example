@@ -4,7 +4,12 @@ class CountriesController < ApplicationController
   # GET /countries
   # GET /countries.json
   def index
-    @countries = Country.all
+    if params[:search].present?
+      @countries = Country.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @countries = Country.all
+    end
+
     @country = Country.new
     @add_mode = params[:add]
   end
