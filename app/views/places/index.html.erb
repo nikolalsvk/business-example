@@ -2,6 +2,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+<%= link_to "Add", places_path(:add => true), :method => :get, :class => "btn btn-primary" %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,7 +20,7 @@
         <td><%= link_to place.id, place_path(place) %></td>
         <td><%= place.postal_code %></td>
         <td><%= place.name %></td>
-        <td><%= place.country_id %></td>
+        <td><%= place.country.name %></td>
         <td><%=l place.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -35,6 +36,15 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_place_path,
-            :class => 'btn btn-primary' %>
+<div class="col-lg-4">
+  <% if @add_mode %>
+    <%= render :partial => 'form' %>
+  <% end %>
+</div>
+
+<div class="col-lg-4"></div>
+<div class="col-lg-4">
+  <%= link_to "Previous",
+              countries_path,
+              :class => 'btn btn-primary' %>
+</div>

@@ -8,7 +8,19 @@
 </head>
 <body>
 
-<%= yield %>
+<%= nav_bar static: :top, :responsive => true do %>
+  <%= menu_group :pull => :left do %>
+    <%= menu_item "Home", root_path %>
+    <%= menu_item "Countries", countries_path %>
+    <%= menu_item "Places", places_path %>
+  <% end %>
+<% end %>
+
+<div class="container">
+
+  <%= yield %>
+
+</div>
 
 </body>
 </html>

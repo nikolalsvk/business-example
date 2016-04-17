@@ -5,6 +5,8 @@ class CountriesController < ApplicationController
   # GET /countries.json
   def index
     @countries = Country.all
+    @country = Country.new
+    @add_mode = params[:add]
   end
 
   # GET /countries/1
@@ -28,10 +30,12 @@ class CountriesController < ApplicationController
 
     respond_to do |format|
       if @country.save
-        format.html { redirect_to @country, notice: 'Country was successfully created.' }
-        format.json { render :show, status: :created, location: @country }
+        format.html { redirect_to countries_path, notice: 'Country was successfully created.' }
+        format.json { render :index, status: :created, location: @country }
       else
-        format.html { render :new }
+        @countries = Country.all
+        @add_mode = true
+        format.html { render :index }
         format.json { render json: @country.errors, status: :unprocessable_entity }
       end
     end
